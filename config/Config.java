@@ -15,9 +15,14 @@ import java.util.HashMap;
  */
 public class Config {
   
-    public Config(String fileName) {
+    public Config(String fileName) throws IOException {
         this.fileName = fileName;
         sectionProperties = new HashMap<String, Properties>();
+        parseFile(fileName);
+    }
+
+    private parseFile(String fileName) throws IOException {
+
     }
   
     private Map<String, Properties> sectionProperties;
