@@ -9,7 +9,7 @@ public class Config {
   
     public Config(String fileName) {
         this.fileName = fileName;
-        sectionPropeties = new HashMap<String, Properties>();
+        sectionProperties = new HashMap<String, Properties>();
     }
   
     private Map<String, Properties> sectionProperties;
