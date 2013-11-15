@@ -1,5 +1,7 @@
 package config;
 
+import java.text.ParseException;
+
 public class Tokenize {
     
     /**
@@ -31,29 +33,31 @@ public class Tokenize {
         return new Token(TOKEN_TYPE.COMMENT, line.substring(index));
     }
     
-    private Token parseSection(String line, int index) {
+    private Token parseSection(String line, int index) 
+        throws ParseException {
         char c = line.charAt(index);
         StringBuilder sb = new StringBuilder();
         while(c != ']' || c != '\n') {
             if(Character.isCharacter(c)) {
                 sb.append(c);
             }else {
-                //throw an exception
+                throw new ParseException(line.trim(), index);
             }
             c = line.charAt(++index);
         }
         if(c == ']') {
             if(line.charAt(++index != '\n') {
-                //throw an exception
+                throw new ParseException(line.trim(), index);
             }
         }
         if(c == '\n') {
-            //throw an exception
+            throw new ParseException(line.trim(), index);
         }
         return new Token(TOKEN_TYPE.SECTION, sb.toString());
     }
     
-    private Token parseProperty(String line, int index) {
+    private Token parseProperty(String line, int index) 
+        throws ParseException {
         char c = line.charAt(index);
         StringBuilder property = new StringBuilder();
         StringBuilder value = new StringBuilder();
@@ -70,12 +74,14 @@ public class Tokenize {
             c = line.charAt(++index);
         }
         if(!foundEquals) {
-            //throw an exception
+            throw new ParseException("cannot find equals", 0);
         }
         if(property.length() == 0) {
-            //throw an exception
+            throw new ParseException("length of property is 0", 0);
         }
-        return new Token()
+        property.append('=');
+        property.append(value);
+        return new Token(TOKEN_TYPE.PROPERTY, property.toString());
     }
 }
 
