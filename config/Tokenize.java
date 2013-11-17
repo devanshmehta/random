@@ -11,8 +11,11 @@ public class Tokenize {
      * @return Token if found otherwise null
      * @throws NullPointerException if the line is null or 
      *         has zero length.
+     * @throws ParseException if there is error in parsing 
+     *         the line.
      */
-    public static Token getTokenFor(String line) {
+    public static Token getTokenFor(String line) 
+        throws ParseException {
         if(line == null || line.length() == 0) {
             throw new NullPointerException();
         }
