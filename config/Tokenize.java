@@ -26,22 +26,22 @@ public class Tokenize {
         if(c == '#') {
             return parseComment(line, index++);
         }else if(c == '[') {
-            parseSection(line, index++);
+            return parseSection(line, index++);
         }else {
-            parseProperty(line, index);
+            return parseProperty(line, index);
         }
     }
     
-    private Token parseComment(String line, int index) {
+    private static Token parseComment(String line, int index) {
         return new Token(TOKEN_TYPE.COMMENT, line.substring(index));
     }
     
-    private Token parseSection(String line, int index) 
+    private static Token parseSection(String line, int index) 
         throws ParseException {
         char c = line.charAt(index);
         StringBuilder sb = new StringBuilder();
         while(c != ']' || c != '\n') {
-            if(Character.isCharacter(c)) {
+            if(Character.isLetter(c)) {
                 sb.append(c);
             }else {
                 throw new ParseException(line.trim(), index);
@@ -49,7 +49,7 @@ public class Tokenize {
             c = line.charAt(++index);
         }
         if(c == ']') {
-            if(line.charAt(++index != '\n') {
+            if(line.charAt(++index) != '\n') {
                 throw new ParseException(line.trim(), index);
             }
         }
@@ -59,7 +59,7 @@ public class Tokenize {
         return new Token(TOKEN_TYPE.SECTION, sb.toString());
     }
     
-    private Token parseProperty(String line, int index) 
+    private static Token parseProperty(String line, int index) 
         throws ParseException {
         char c = line.charAt(index);
         StringBuilder property = new StringBuilder();
@@ -107,7 +107,7 @@ class Token {
         return value;
     }
     
-    private String TOKEN_TYPE tokenType;
+    private TOKEN_TYPE tokenType;
     private String value;
   
 }
