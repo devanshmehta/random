@@ -2,6 +2,11 @@ package config;
 
 import java.text.ParseException;
 
+/**
+ * Class for creating tokens for the config.
+ * 
+ * @author devansh.mht@gmail.com
+ */
 public class Tokenize {
     
     /**
