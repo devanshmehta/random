@@ -29,23 +29,23 @@ public class Tokenize {
         int index = 0;
         char c = line.charAt(index);
         if(c == '#') {
-            return parseComment(line, index++);
+            return parseComment(line, ++index);
         }else if(c == '[') {
-            return parseSection(line, index++);
+            return parseSection(line, ++index);
         }else {
             return parseProperty(line, index);
         }
     }
     
     private static Token parseComment(String line, int index) {
-        return new Token(TOKEN_TYPE.COMMENT, line.substring(index));
+        return new Token(TOKEN_TYPE.COMMENT, line.substring(index).trim());
     }
     
     private static Token parseSection(String line, int index) 
         throws ParseException {
         char c = line.charAt(index);
         StringBuilder sb = new StringBuilder();
-        while(c != ']' || c != '\n') {
+        while(c != ']' && c != '\n') {
             if(Character.isLetter(c)) {
                 sb.append(c);
             }else {
@@ -73,6 +73,8 @@ public class Tokenize {
         while(index < line.length() - 1) {
             if(c == '=') {
                 foundEquals = true;
+                c = line.charAt(++index);
+                continue;
             }
             if(!foundEquals) {
                 property.append(c);
@@ -110,6 +112,30 @@ class Token {
     
     public String getValue() {
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return ("Token Type: " + tokenType + 
+                " Value: " + value);
+    }
+
+    @Override
+    public int hashCode() {
+        return tokenType.hashCode() + value.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) {
+            return true;
+        }
+        if(!(obj instanceof Token)) {
+            return false;
+        }
+        Token token = (Token) obj;
+        return (tokenType == token.tokenType && 
+                value.equals(token.value));        
     }
     
     private TOKEN_TYPE tokenType;
