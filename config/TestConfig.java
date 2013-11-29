@@ -15,9 +15,16 @@ public class TestConfig {
         String fileName = "config/testfile.config";
         Config config = new Config(fileName);
         String s = config.getProperty("firstsection", "propertyname");
-        System.out.println(s);
+        assertEquals("value", s);
         s = config.getProperty("secondsection", "propertyname");
-        System.out.println(s);
+        assertEquals("value", s);
     }
 
+    public static void assertEquals(String expected, String actual) {
+        if(!expected.equals(actual)) {
+            String message = ("expected(" + expected + ") " + 
+                              "!= actual(" + actual +")");
+            throw new RuntimeException(message);
+        }
+    }
 }
