@@ -38,7 +38,7 @@ public class Tokenize {
     }
     
     private static Token parseComment(String line, int index) {
-        return new Token(TOKEN_TYPE.COMMENT, line.substring(index).trim());
+        return new Token(TokenType.COMMENT, line.substring(index).trim());
     }
     
     private static Token parseSection(String line, int index) 
@@ -61,7 +61,7 @@ public class Tokenize {
         if(c == '\n') {
             throw new ParseException(line.trim(), index);
         }
-        return new Token(TOKEN_TYPE.SECTION, sb.toString());
+        return new Token(TokenType.SECTION, sb.toString());
     }
     
     private static Token parseProperty(String line, int index) 
@@ -91,54 +91,6 @@ public class Tokenize {
         }
         property.append('=');
         property.append(value);
-        return new Token(TOKEN_TYPE.PROPERTY, property.toString());
+        return new Token(TokenType.PROPERTY, property.toString());
     }
-}
-
-enum TOKEN_TYPE {
-    COMMENT, PROPERTY, SECTION
-}
-
-class Token {
-    
-    public Token(TOKEN_TYPE tokenType, String value) {
-        this.tokenType = tokenType;
-        this.value = value;
-    }
-    
-    public TOKEN_TYPE getTokenType() {
-        return tokenType;
-    }
-    
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public String toString() {
-        return ("Token Type: " + tokenType + 
-                " Value: " + value);
-    }
-
-    @Override
-    public int hashCode() {
-        return tokenType.hashCode() + value.hashCode();
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if(this == obj) {
-            return true;
-        }
-        if(!(obj instanceof Token)) {
-            return false;
-        }
-        Token token = (Token) obj;
-        return (tokenType == token.tokenType && 
-                value.equals(token.value));        
-    }
-    
-    private TOKEN_TYPE tokenType;
-    private String value;
-  
 }

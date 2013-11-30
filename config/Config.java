@@ -39,11 +39,11 @@ public class Config {
                     continue;
                 }
                 Token token = Tokenize.getTokenFor(line);
-                if(token.getTokenType() == TOKEN_TYPE.SECTION) {
+                if(token.getTokenType() == TokenType.SECTION) {
                     sectionName = token.getValue();
                     property = new Properties();
                     sectionProperties.put(sectionName, property);
-                } else if(token.getTokenType() == TOKEN_TYPE.PROPERTY) {
+                } else if(token.getTokenType() == TokenType.PROPERTY) {
                     if(property == null) {
                         String message = ("No section found for " +
                                           token.getValue());
@@ -53,7 +53,7 @@ public class Config {
                     String propertyName = line.substring(0, equalsIndex);
                     String value = line.substring(equalsIndex + 1);
                     property.setProperty(propertyName, value);
-                } else if(token.getTokenType() == TOKEN_TYPE.COMMENT) {
+                } else if(token.getTokenType() == TokenType.COMMENT) {
                     //ignore
                 } else {
                     String message = ("No token found for " + 
