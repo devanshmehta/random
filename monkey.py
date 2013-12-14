@@ -1,6 +1,16 @@
 from itertools import combinations
 from Queue import Queue
 
+"""
+   This is a puzzle. There are 3 Men, 1 Big Monkey, 1 Small Monkey.
+   All the players are on the one side of the river. The goal of the 
+   puzzle is to move all the players to other side of the river.
+   Constraints are there is only one boat. Only 3 men and 1 big monkey
+   can row the boat. Only 2 players can use the boat at one time. 
+   If there are more monkeys than man on any side of the river at any 
+   point of time, then monkeys will eat man.
+"""
+
 class Player:
 
     def is_man(self):
