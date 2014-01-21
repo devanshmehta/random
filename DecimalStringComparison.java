@@ -8,7 +8,7 @@ import java.util.Comparator;
  */
 public class DecimalStringComparison implements Comparator<String> {
 
-    public int compareTo(String firstNum, String secondNum) {
+    public int compare(String firstNum, String secondNum) {
         int charsBeforeDotInFirstNum = getCharsBeforeDot(firstNum);
         int charsBeforeDotInSecondNum = getCharsBeforeDot(secondNum);
         if(charsBeforeDotInFirstNum != charsBeforeDotInSecondNum) {
