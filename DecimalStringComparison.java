@@ -1,7 +1,8 @@
 import java.util.Comparator;
 
 /**
- * Compares decimals represented as String.
+ * Compares decimals represented as String. It compares
+ * only the positive integers.
  * 
  * @author devansh.mht@gmail.com (Devansh Mehta)
  */
