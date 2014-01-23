@@ -2,15 +2,18 @@ import java.util.Comparator;
 
 /**
  * Compares decimals represented as String. It compares
- * only the positive integers. The compare method assumes
- * all the strings are properly formatted as xyz.abc or 
- * xyz where x,y,z,a,b,c are characters in (0-9).
+ * only the positive and negative decimals. The compare method 
+ * assumes all the strings are properly formatted as xyz.abc or 
+ * xyz or -xyz.abc or -xyz where x,y,z,a,b,c are characters in 
+ * (0-9).
  * 
  * @author devansh.mht@gmail.com (Devansh Mehta)
  */
 public class DecimalStringComparison implements Comparator<String> {
 
     public int compare(String firstNum, String secondNum) {
+        boolean isFirstNumNegative = isNegative(firstNum);
+        boolean isSecondNumNegative = isNegative(secondNum);
         int charsBeforeDotInFirstNum = getCharsBeforeDot(firstNum);
         int charsBeforeDotInSecondNum = getCharsBeforeDot(secondNum);
         if(charsBeforeDotInFirstNum != charsBeforeDotInSecondNum) {
@@ -75,6 +78,16 @@ public class DecimalStringComparison implements Comparator<String> {
             }
         }
         return 0;
+    }
+    
+    /**
+     * Checks whether the number is negative.
+     * 
+     * @param num
+     * @return true if the number is negative.
+     */
+    private boolean isNegative(String num) {
+        return (num.charAt(0) == '-');    
     }
     
     /**
