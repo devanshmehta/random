@@ -1,3 +1,10 @@
+"""Module can be used to query intervals such that 
+   from a sorted list. It takes log(n) time to return 
+   queried interval. This module doesnot support update 
+   and removals from the sorted list"""
+   
+__author__ = 'devansh.mht@gmail.com'
+
 def lsearch(l, val, lo = 0, high = None):
     """returns the left most index of val if val
        is in l otherwise returns index x such that
