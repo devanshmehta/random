@@ -30,22 +30,20 @@ class Board(object):
 def count_queens_starting_at(row, column, board):
     count = 0
     if column >= board.n:
-	return 1
-    for j in xrange(column, board.n):
-        for i in xrange(row, board.n):
-            if not board.safe_square(i, j):   
-                continue
-            board.block_board(i, j)
-            count += count_queens_starting_at(i, j, board)
-            board.unblock_board(i, j)
+		return 1
+    for i in xrange(row, board.n):
+        if not board.safe_square(i, column):	
+             continue
+        board.block_board(i, column)
+        count += count_queens_starting_at(0, column + 1, board)
+        board.unblock_board(i, column)
     return count
     
 def count_queens(n):
     count = 0
     for i in xrange(n):
-        for j in xrange(n):
-            board = Board(n)
-            count += count_queens_starting_at(i, j, board)
+        board = Board(n)
+        count += count_queens_starting_at(i, 0, board)
     return count
     
 def main():
