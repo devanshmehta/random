@@ -1,6 +1,10 @@
+import java.util.concurrent.AtomicInteger;
+import java.util.concurrent.AtomicBoolean;
+
 /**
 * Ring or circular buffer. This Circular buffer 
-* is thread safe.
+* is thread safe. Please make sure that this Buffer
+* is used by only two threads a) Consumer b) Producer
 * 
 * @author devansh.mht@gmail.com
 */
@@ -27,7 +31,7 @@ public class CircularBuffer <E>{
     }
     
     public void add(E e) {
-        if (isFull()) {
+        if (isFull() && !inPoll) {
             getPointer++;
         }
         int add = addPointer % size;
@@ -36,12 +40,14 @@ public class CircularBuffer <E>{
     }
     
     public E poll() {
+        inPoll = true;
         if (isEmpty()) {
             return null;
         }
         int get = getPointer % size;
         E e = arr[get];
         ++getPointer;
+        inPoll = false;
         return e;
     }
     
@@ -49,5 +55,6 @@ public class CircularBuffer <E>{
     private int getPointer;
     private int addPointer;
     private int count;
+    private boolean inPool;
     private E[] arr;
 }
