@@ -1,4 +1,5 @@
-'''counting all the solutions in the n queens problem.
+'''
+   counting all the solutions in the n queens problem.
    The solution is based on niklaus wirth's solution
    for 8 queens board
 '''
