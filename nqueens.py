@@ -24,8 +24,8 @@ class Board(object):
         self.diff_diag[i - j + (self.n - 1)] = True
         
     def safe_square(self, i, j):
-        (self.rows[i] and self.sum_diag[i + j] and 
-         self.diff_diag[i - j + (self.n - 1)])
+        return (self.rows[i] and self.sum_diag[i + j] and 
+                self.diff_diag[i - j + (self.n - 1)])
 
 def count_queens_starting_at(row, column, board):
     count = 0
