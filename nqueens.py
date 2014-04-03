@@ -40,10 +40,8 @@ def count_queens_starting_at(row, column, board):
     return count
     
 def count_queens(n):
-    count = 0
-    for i in xrange(n):
-        board = Board(n)
-        count += count_queens_starting_at(i, 0, board)
+    board = Board(n)
+    count = count_queens_starting_at(0, 0, board)
     return count
     
 def main():
