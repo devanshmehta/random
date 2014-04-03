@@ -30,7 +30,7 @@ class Board(object):
 def count_queens_starting_at(row, column, board):
     count = 0
     if column >= board.n:
-		return 1
+	return 1
     for j in xrange(column, board.n):
         for i in xrange(row, board.n):
             if not board.safe_square(i, j):   
