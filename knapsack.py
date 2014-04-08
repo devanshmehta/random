@@ -16,7 +16,7 @@ def knapsack(w, v, max_weight, start_item, memo):
       if (i - 1, max_weight) not in memo:
         value = knapsack(w, v, max_weight, i - 1, memo)
         memo[(i - 1, max_weight)] = value
-      if (i - 1, max_weight - item) not in memo:
+      if (i - 1, max_weight - item_weight) not in memo:
         value = knapsack(w, v, max_weight - item_weight, i - 1, memo)
         memo[(i - 1, max_weight - item_weight)] = value
       memo[i, max_weight] = max(memo[(i - 1, max_weight)], 
