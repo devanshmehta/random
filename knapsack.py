@@ -5,6 +5,8 @@ w = [5,2,6,7,2,4]
 v = [1,2,8,5,4,3]
 
 def knapsack(w, v, max_weight, start_item, memo):
+  if i < 0:
+    return 0
   for i in xrange(start_item, len(w)):
     item_weight = w[i]
     item_value = v[i]
