@@ -1,6 +1,40 @@
 
 __author__ = 'devansh.mht@gmail.com'
 
+class CircularBuffer:
+    
+    '''Circular Buffer '''
+    
+    def __init__(self, size):
+        self.__buffer = [0] * size
+        self.size = size
+        self.currentIndexToPut = 0
+        self.currentIndexToGet = -1
+        
+    def peek(self):
+        pass
+    
+    def add(self, elem):
+        pass
+    
+    def pop(self):
+        pass
+
+class RateLimiterSpace:
+    
+    def __init__(self, rate, interval):
+        self.__lastRequests = CircularBuffer(rate)
+        self.rate = rate
+        self.interval = interval
+        
+    def allow(self, now):
+        lastTime = self.__lastRequests.peek()
+        if now - lastTime >= self.interval:
+            self.__lastRequests.add(now)
+            return True
+        else:
+            return False
+
 class RateLimiter:
     '''Uses an approach similar to bucket tocken 
        model to calculate the rate. This approach 
