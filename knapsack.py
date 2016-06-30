@@ -22,5 +22,10 @@ def knapsack(w, v, max_weight, start_item, memo):
       memo[i, max_weight] = max(memo[(i - 1, max_weight)], 
                                 memo[(i - 1, max_weight - item_weight)] + item_value)
   return memo[(len(w) - 1, max_weight)]
+
+length = int(raw_input())
+weights = map(int, raw_input().split(' '))
+values = map(int, raw_input().split(' '))
+max_weight = int(raw_input())
   
-print knapsack(w, v, 10, 0, {})
+print knapsack(weights, values, max_weight, 0, {})
