@@ -4,9 +4,11 @@ class SegmentTree(object):
 
     """Segment to update and query in log(n) time"""
     
-    #the structure of the segment is similar to heap 
-    #x -> index of the node, 2*x -> left son 2*x + 1 -> right son
-    #Each node interval stores count for that interval
+    # the structure of the segment is similar to heap 
+    # x -> index of the node, 2*x -> left son 2*x + 1 -> right son
+    # Each node interval stores count for that interval
+    # Currrent implementation can be used to rolling median
+    # https://www.geeksforgeeks.org/efficiently-design-insert-delete-median-queries-set/
 
     def __init__(self, size):
         """Size is the max element which will be stored in this data 
@@ -15,7 +17,7 @@ class SegmentTree(object):
         self.num_nodes = int(math.pow(2, int(math.log(size + 1)) + 1))
         self.segment_tree = [0] * self.num_nodes
 
-    def increment_count(self, num, low, high, subtree = 0, increment = 1):
+    def increment_count(self, num, low, high, subtree=0, increment=1):
         """Increments the count for the given value"""
         mid = int((low + high)) / 2
         if num == high:
@@ -25,7 +27,7 @@ class SegmentTree(object):
         else:
             self.increment_count(num, mid + 1, high, 2 * subtree + 1)
         
-    def query(self, num, low, high, subtree = 0):
+    def query(self, num, low, high, subtree=0):
         """Finds the number of elements <= num"""        
         mid = int((low + high)) / 2
         if num == high:
